@@ -2,10 +2,12 @@
 
 set -e
 
-failure(){
+handle_error(){
     echo "error in line number: $1 and error command : $2"
 }
-trap 'failure ${LINENO} "$BASH_COMMAND"' ERR
+
+trap 'handle_error ${LINENO} "$BASH_COMMAND"' ERR
+
 
 USERID=$(id -u)
 TIMESTAMP=$(date +%F-%H-%M-%S)
