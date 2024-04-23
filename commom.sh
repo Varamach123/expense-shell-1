@@ -1,13 +1,13 @@
+
 #!/bin/bash
 
 set -e
 
 handle_error(){
-    echo "error in line number: $1 and error command : $2"
+    echo "Error occured at line number: $1, error command: $2"
 }
 
 trap 'handle_error ${LINENO} "$BASH_COMMAND"' ERR
-
 
 USERID=$(id -u)
 TIMESTAMP=$(date +%F-%H-%M-%S)
@@ -28,13 +28,13 @@ VALIDATE(){
         echo -e "$2...$G SUCCESS $N"
     fi
 }
-check_root(){
-if [ $USERID -ne 0 ]
-then
-    echo "Please run this script with root access."
-    exit 1 # manually exit if error comes.
-else
-    echo "You are super user."
-fi
-}
 
+check_root(){
+    if [ $USERID -ne 0 ]
+    then
+        echo "Please run this script with root access."
+        exit 1 # manually exit if error comes.
+    else
+        echo "You are super user."
+    fi
+}
